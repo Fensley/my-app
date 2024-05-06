@@ -1,11 +1,31 @@
-import { useState } from "react";
+import { useDebugValue, useState } from "react";
 
 export default function App() {
   const [slack, setSlack] = useState("");
-
+  const [trello, setTrello] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [github, setGithub] = useState("");
+  const [google, setGoogle] = useState("");
+  function handletrello() {
+    setSlack("you clicked Trello");
+  }
+  function handlediscord() {
+    setSlack("you clicked Discord");
+  }
+  function handlelinkedin() {
+    setSlack("you clicked Linkedin");
+  }
+  function handlegithub() {
+    setSlack("you clicked Github");
+  }
+  function handlegoogle() {
+    setSlack("you clicked Google");
+  }
   function handleslack() {
     setSlack("you clicked slack");
   }
+
   const [toggle, setToggle] = useState(false);
   function handletoggle() {
     setToggle((tg) => !tg);
@@ -54,7 +74,6 @@ function Button({ slack, toggle, handleslack, toggle1 }) {
   );
 }
 function Listapp({
-  handleslack,
   handletoggle,
   toggle,
   toggle1,
