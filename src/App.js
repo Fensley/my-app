@@ -1,27 +1,12 @@
-import { useDebugValue, useState } from "react";
+import { useState } from "react";
 
 export default function App() {
   const [slack, setSlack] = useState("");
   const [trello, setTrello] = useState("");
-  const [discord, setDiscord] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [github, setGithub] = useState("");
-  const [google, setGoogle] = useState("");
   function handletrello() {
-    setSlack("you clicked Trello");
+    setTrello("you clicked Trello");
   }
-  function handlediscord() {
-    setSlack("you clicked Discord");
-  }
-  function handlelinkedin() {
-    setSlack("you clicked Linkedin");
-  }
-  function handlegithub() {
-    setSlack("you clicked Github");
-  }
-  function handlegoogle() {
-    setSlack("you clicked Google");
-  }
+
   function handleslack() {
     setSlack("you clicked slack");
   }
@@ -32,6 +17,11 @@ export default function App() {
     handleslack();
   }
   const [toggle1, setToggle1] = useState(false);
+  function handletoggle1() {
+    setToggle1((tg) => !tg);
+    handletrello();
+  }
+
   const [toggle2, setToggle2] = useState(false);
   const [toggle3, setToggle3] = useState(false);
   const [toggle4, setToggle4] = useState(false);
@@ -45,6 +35,7 @@ export default function App() {
           handleslack={handleslack}
           toggle={toggle}
           handletoggle={handletoggle}
+          handletoggle1={handletoggle1}
           toggle1={toggle1}
           setToggle1={setToggle1}
           toggle2={toggle2}
@@ -56,23 +47,32 @@ export default function App() {
           toggle5={toggle5}
           setToggle5={setToggle5}
         />
-        <Button slack={slack} handletoggle={handletoggle} toggle={toggle} />
+        <Button
+          slack={slack}
+          handletoggle={handletoggle}
+          toggle={toggle}
+          trello={trello}
+          toggle1={toggle1}
+        />
       </div>
     </div>
   );
 }
-function Button({ slack, toggle, handleslack, toggle1 }) {
-  // console.log(handleslack);
+
+function Button({ slack, toggle, trello, toggle1 }) {
   const add = "Add More Apps";
-  // console.log(slack);
+  // console.log(trello);
+  console.log(toggle1);
+
   return (
     <>
       <br />
       <hr />
-      <button>{toggle ? slack : add}</button>
+      <button>{toggle ? slack : add && toggle1 ? trello : add}</button>
     </>
   );
 }
+
 function Listapp({
   handletoggle,
   toggle,
@@ -86,6 +86,7 @@ function Listapp({
   setToggle4,
   toggle5,
   setToggle5,
+  handletoggle1,
 }) {
   return (
     <div className="app">
@@ -102,7 +103,7 @@ function Listapp({
 
       <div
         className={toggle1 ? " second one-name toggle " : "second one-name"}
-        onClick={() => setToggle1((tg) => !tg)}
+        onClick={handletoggle1}
       >
         <i className="fa-brands fa-trello" style={{ color: "#74C0FC" }}></i>
         <p>Trello</p>
