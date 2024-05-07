@@ -3,6 +3,22 @@ import { useState } from "react";
 export default function App() {
   const [slack, setSlack] = useState("");
   const [trello, setTrello] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [github, setGithub] = useState("");
+  const [google, setGoogle] = useState("");
+  function handlegoogle() {
+    setGoogle("you clicked google");
+  }
+  function handlegithub() {
+    setGithub("you clicked github");
+  }
+  function handlelinkedin() {
+    setLinkedin("you clicked linkedin");
+  }
+  function handlediscord() {
+    setDiscord(" you clicked Discord");
+  }
   function handletrello() {
     setTrello("you clicked Trello");
   }
@@ -21,11 +37,26 @@ export default function App() {
     setToggle1((tg) => !tg);
     handletrello();
   }
-
   const [toggle2, setToggle2] = useState(false);
+  function handletoggle2() {
+    setToggle2((tg) => !tg);
+    handlediscord();
+  }
   const [toggle3, setToggle3] = useState(false);
+  function handletoggle3() {
+    setToggle3((tg) => !tg);
+    handlelinkedin();
+  }
   const [toggle4, setToggle4] = useState(false);
+  function handletoggle4() {
+    setToggle4((tg) => !tg);
+    handlegithub();
+  }
   const [toggle5, setToggle5] = useState(false);
+  function handletoggle5() {
+    setToggle5((tg) => !tg);
+    handlegoogle();
+  }
   return (
     <div className="container">
       <div className="card">
@@ -36,16 +67,15 @@ export default function App() {
           toggle={toggle}
           handletoggle={handletoggle}
           handletoggle1={handletoggle1}
+          handletoggle2={handletoggle2}
           toggle1={toggle1}
-          setToggle1={setToggle1}
           toggle2={toggle2}
-          setToggle2={setToggle2}
           toggle3={toggle3}
-          setToggle3={setToggle3}
           toggle4={toggle4}
-          setToggle4={setToggle4}
           toggle5={toggle5}
-          setToggle5={setToggle5}
+          handletoggle3={handletoggle3}
+          handletoggle4={handletoggle4}
+          handletoggle5={handletoggle5}
         />
         <Button
           slack={slack}
@@ -53,22 +83,55 @@ export default function App() {
           toggle={toggle}
           trello={trello}
           toggle1={toggle1}
+          toggle2={toggle2}
+          discord={discord}
+          linkedin={linkedin}
+          toggle3={toggle3}
+          toggle4={toggle4}
+          github={github}
+          google={google}
+          toggle5={toggle5}
         />
       </div>
     </div>
   );
 }
 
-function Button({ slack, toggle, trello, toggle1 }) {
+function Button({
+  slack,
+  toggle,
+  trello,
+  toggle1,
+  discord,
+  toggle2,
+  linkedin,
+  toggle3,
+  toggle4,
+  github,
+  google,
+  toggle5,
+}) {
   const add = "Add More Apps";
-  // console.log(trello);
-  console.log(toggle1);
 
   return (
     <>
       <br />
       <hr />
-      <button>{toggle ? slack : add && toggle1 ? trello : add}</button>
+      <button>
+        {toggle
+          ? slack
+          : add && toggle1
+          ? trello
+          : add && toggle2
+          ? discord
+          : add && toggle3
+          ? linkedin
+          : add && toggle4
+          ? github
+          : add && toggle5
+          ? google
+          : add}
+      </button>
     </>
   );
 }
@@ -77,16 +140,15 @@ function Listapp({
   handletoggle,
   toggle,
   toggle1,
-  setToggle1,
   toggle2,
-  setToggle2,
   toggle3,
-  setToggle3,
   toggle4,
-  setToggle4,
   toggle5,
-  setToggle5,
   handletoggle1,
+  handletoggle2,
+  handletoggle3,
+  handletoggle4,
+  handletoggle5,
 }) {
   return (
     <div className="app">
@@ -111,7 +173,7 @@ function Listapp({
 
       <div
         className={toggle2 ? "third one-name toggle" : "third one-name"}
-        onClick={() => setToggle2((tg) => !tg)}
+        onClick={handletoggle2}
       >
         <i className="fa-brands fa-discord" style={{ color: "#B197FC" }}></i>
         <p>Discord</p>
@@ -119,7 +181,7 @@ function Listapp({
 
       <div
         className={toggle3 ? "fouth one-name toggle" : "fouth one-name"}
-        onClick={() => setToggle3((tg) => !tg)}
+        onClick={handletoggle3}
       >
         <i className="fa-brands fa-linkedin"></i>
         <p>linkedin</p>
@@ -127,7 +189,7 @@ function Listapp({
 
       <div
         className={toggle4 ? "fith one-name toggle" : "fith one-name"}
-        onClick={() => setToggle4((tg) => !tg)}
+        onClick={handletoggle4}
       >
         <i className="fa-brands fa-github"></i>
         <p>Github</p>
@@ -135,7 +197,7 @@ function Listapp({
 
       <div
         className={toggle5 ? "fith one-name toggle" : "fith one-name"}
-        onClick={() => setToggle5((tg) => !tg)}
+        onClick={handletoggle5}
       >
         <i className="fa-brands fa-google"></i>
         <p>Google</p>
